@@ -3,6 +3,7 @@ using Academico.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Academico.Migrations
 {
     [DbContext(typeof(AcademicoContext))]
-    partial class AcademicoContextModelSnapshot : ModelSnapshot
+    [Migration("20251111234529_instituição")]
+    partial class instituição
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,9 +68,6 @@ namespace Academico.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("InstituiçãoOrigemInstituiçãoId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -77,8 +77,6 @@ namespace Academico.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("InstituiçãoOrigemInstituiçãoId");
 
                     b.ToTable("Departamentos");
                 });
@@ -102,17 +100,6 @@ namespace Academico.Migrations
                     b.HasKey("InstituiçãoId");
 
                     b.ToTable("Instituição");
-                });
-
-            modelBuilder.Entity("Academico.Models.Departamento", b =>
-                {
-                    b.HasOne("Academico.Models.Instituição", "InstituiçãoOrigem")
-                        .WithMany()
-                        .HasForeignKey("InstituiçãoOrigemInstituiçãoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("InstituiçãoOrigem");
                 });
 #pragma warning restore 612, 618
         }

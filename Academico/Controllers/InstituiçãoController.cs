@@ -10,22 +10,22 @@ using Academico.Models;
 
 namespace Academico.Controllers
 {
-    public class DepartamentoController : Controller
+    public class InstituiçãoController : Controller
     {
         private readonly AcademicoContext _context;
 
-        public DepartamentoController(AcademicoContext context)
+        public InstituiçãoController(AcademicoContext context)
         {
             _context = context;
         }
 
-        // GET: Departamento
+        // GET: Instituição
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Departamentos.ToListAsync());
+            return View(await _context.Instituição.ToListAsync());
         }
 
-        // GET: Departamento/Details/5
+        // GET: Instituição/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace Academico.Controllers
                 return NotFound();
             }
 
-            var departamento = await _context.Departamentos
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (departamento == null)
+            var instituição = await _context.Instituição
+                .FirstOrDefaultAsync(m => m.InstituiçãoId == id);
+            if (instituição == null)
             {
                 return NotFound();
             }
 
-            return View(departamento);
+            return View(instituição);
         }
 
-        // GET: Departamento/Create
+        // GET: Instituição/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Departamento/Create
+        // POST: Instituição/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Telefone,Email,InstituicaoId")] Departamento departamento)
+        public async Task<IActionResult> Create([Bind("InstituiçãoId,Nome,Telefone")] Instituição instituição)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(departamento);
+                _context.Add(instituição);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(departamento);
+            return View(instituição);
         }
 
-        // GET: Departamento/Edit/5
+        // GET: Instituição/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace Academico.Controllers
                 return NotFound();
             }
 
-            var departamento = await _context.Departamentos.FindAsync(id);
-            if (departamento == null)
+            var instituição = await _context.Instituição.FindAsync(id);
+            if (instituição == null)
             {
                 return NotFound();
             }
-            return View(departamento);
+            return View(instituição);
         }
 
-        // POST: Departamento/Edit/5
+        // POST: Instituição/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Telefone,Email,InstituicaoId")] Departamento departamento)
+        public async Task<IActionResult> Edit(int id, [Bind("InstituiçãoId,Nome,Telefone")] Instituição instituição)
         {
-            if (id != departamento.Id)
+            if (id != instituição.InstituiçãoId)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace Academico.Controllers
             {
                 try
                 {
-                    _context.Update(departamento);
+                    _context.Update(instituição);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DepartamentoExists(departamento.Id))
+                    if (!InstituiçãoExists(instituição.InstituiçãoId))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace Academico.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(departamento);
+            return View(instituição);
         }
 
-        // GET: Departamento/Delete/5
+        // GET: Instituição/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,34 +124,34 @@ namespace Academico.Controllers
                 return NotFound();
             }
 
-            var departamento = await _context.Departamentos
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (departamento == null)
+            var instituição = await _context.Instituição
+                .FirstOrDefaultAsync(m => m.InstituiçãoId == id);
+            if (instituição == null)
             {
                 return NotFound();
             }
 
-            return View(departamento);
+            return View(instituição);
         }
 
-        // POST: Departamento/Delete/5
+        // POST: Instituição/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var departamento = await _context.Departamentos.FindAsync(id);
-            if (departamento != null)
+            var instituição = await _context.Instituição.FindAsync(id);
+            if (instituição != null)
             {
-                _context.Departamentos.Remove(departamento);
+                _context.Instituição.Remove(instituição);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool DepartamentoExists(int id)
+        private bool InstituiçãoExists(int id)
         {
-            return _context.Departamentos.Any(e => e.Id == id);
+            return _context.Instituição.Any(e => e.InstituiçãoId == id);
         }
     }
 }

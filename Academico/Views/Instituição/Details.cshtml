@@ -1,4 +1,4 @@
-﻿@model Academico.Models.Departamento
+﻿@model Academico.Models.Instituição
 
 @{
     ViewData["Title"] = "Details";
@@ -7,7 +7,7 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Departamento</h4>
+    <h4>Instituição</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -22,21 +22,9 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Telefone)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.InstituicaoId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.InstituicaoId)
-        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model?.InstituiçãoId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
